@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <title>電子音叉 - Tuning Fork</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css">
+  <style>
+    body { margin-top: 20px; background-color: #f4f5f6; }
+    .container { background: white; padding: 3rem; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); max-width: 800px; }
+    #visualizer { width: 100%; height: 180px; background-color: #222; border-radius: 4px; margin-bottom: 2rem; border: 2px solid #333; }
+    .status-area { height: 30px; margin-bottom: 10px; }
+    .playing { color: #9b4dca; font-weight: bold; }
+    input[type="range"] { width: 100%; }
+    .label-inline { margin-right: 1.5rem; }
+    .info-box { background: #eef2ff; padding: 15px; border-radius: 4px; font-size: 0.9em; margin-bottom: 20px; }
+  </style>
+</head>
+<body>
+<div class="container">
+    <h1>電子音叉 <small>Tuning Fork</small></h1>
+    
+    <div class="info-box">
+        楽器の調律や音感トレーニング用の電子音叉です。正弦波が最も純音（音叉の音）に近くなります。<br>
+        <strong>可変範囲: 20Hz 〜 2000Hz</strong>
+    </div>
+    
+    <canvas id="visualizer"></canvas>
+
+    <div class="status-area">
+        <p id="status" style="display:none;" class="playing">● 発音中...</p>
+    </div>
+
+    <fieldset>
+        <div class="row">
+            <div class="column">
+                <label for="freq">周波数 (Hz)</label>
+                <input type="number" id="freq" value="440" min="20" max="2000">
+                <input type="range" id="freqSlider" min="0" max="1" step="0.001" value="0.212">
+            </div>
+            <div class="column">
+                <label for="volume">音量 (Gain)</label>
+                <input type="range" id="volume" min="0" max="0.5" step="0.01" value="0.1">
+            </div>
+        </div>
+
+        <label>波形（音色）の選択</label>
+        <div class="row">
+            <div class="column">
+                <input type="radio" name="waveform" value="sine" checked id="w1"><label class="label-inline" for="w1">正弦波</label>
+                <input type="radio" name="waveform" value="triangle" id="w3"><label class="label-inline" for="w3">三角波</label>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="row">
+            <div class="column"><button id="play" class="button">スタート</button></div>
+            <div class="column"><button id="stop" class="button button-outline">ストップ</button></div>
+        </div>
+    </fieldset>
+</div>
+<script src="./tuningfork.js"></script>
+</body>
+</html>
